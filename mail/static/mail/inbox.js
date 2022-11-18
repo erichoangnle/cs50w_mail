@@ -32,7 +32,7 @@ function load_mailbox(mailbox) {
   document.querySelector('#compose-view').style.display = 'none';
 
   // Show the mailbox name
-  document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
+  document.querySelector('#emails-view').innerHTML = `<h2>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h2><hr>`;
 
   // Get emails
   fetch(`/emails/${mailbox}`)
@@ -44,19 +44,19 @@ function load_mailbox(mailbox) {
 
       // Add HTML elements
       const element = document.createElement('div');
-      const from_to = document.createElement('span');
-      const subject = document.createElement('span');
-      const time = document.createElement('span');
+      const from_to = document.createElement('div');
+      const subject = document.createElement('div');
+      const time = document.createElement('div');
+
+      element.className = 'row';
+      from_to.className = 'col-4';
+      subject.className = 'col-5';
+      time.className = 'col-3';
 
       // Add style
-      element.style.borderStyle = 'hidden';
+      time.style.textAlign = 'right';
       element.style.borderRadius = '5px';
       element.style.padding = '3px';
-      from_to.style.marginLeft = '5px';
-      subject.style.position = 'relative';
-      subject.style.left = '70px';
-      time.style.float = 'right';
-      time.style.marginRight = '5px';
       element.style.margin = '2px';
       
       // Change color if email is read
@@ -127,6 +127,11 @@ function read_email(id) {
 
     // Add reply buttons
     const reply = document.createElement('button');
+    const archive = document.createElement('button');
+    reply.className = 'btn btn-primary';
+    archive.className = 'btn btn-primary';
+    reply.style.marginRight = '5px';
+    archive.style.marginLeft = '5px';
     reply.innerHTML = "Reply";
     // Add functionality when button is clicked on
     reply.addEventListener('click', function() {
@@ -139,11 +144,10 @@ function read_email(id) {
       document.querySelector('#compose-body').setSelectionRange(0, 0);
       document.querySelector('#compose-body').focus();
     })
-    document.querySelector('#read-email').append(reply);
+    
     
     // Add archive or unarchive button accordingly
     if (email['archived'] == false) {
-      const archive = document.createElement('button');
       archive.innerHTML = "Archive";
       // Add functionality when button is clicked on
       archive.addEventListener('click', function() {
@@ -158,12 +162,10 @@ function read_email(id) {
           load_mailbox('archive');
         })     
       })
-      document.querySelector('#read-email').append(archive);
     } else {
-      const unarchive = document.createElement('button');
-      unarchive.innerHTML = "Unarchive";
+      archive.innerHTML = "Unarchive";
       // Add functionality when button is clicked on
-      unarchive.addEventListener('click', function() {
+      archive.addEventListener('click', function() {
         fetch(`/emails/${email['id']}`, {
           method: 'PUT',
           body: JSON.stringify ({
@@ -176,8 +178,9 @@ function read_email(id) {
         })
         
       })
-      document.querySelector('#read-email').append(unarchive);
     }
+    document.querySelector('#read-email').append(reply);
+    document.querySelector('#read-email').append(archive);
   })
 }
 
