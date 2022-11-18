@@ -139,7 +139,13 @@ function read_email(id) {
       compose_email();
       // Pre-populate appropriate fields
       document.querySelector('#compose-recipients').value = `${email['sender']}`;
-      document.querySelector('#compose-subject').value = `Re: ${email['subject']}`;
+
+      if (email['subject'].slice(0, 3) == 'Re:') {
+        document.querySelector('#compose-subject').value = `${email['subject']}`;
+      } else {
+        document.querySelector('#compose-subject').value = `Re: ${email['subject']}`;
+      }
+
       document.querySelector('#compose-body').value = `\n-------------------\n On ${email['timestamp']} ${email['sender']} wrote:\n${email['body']}`;
       document.querySelector('#compose-body').setSelectionRange(0, 0);
       document.querySelector('#compose-body').focus();
