@@ -114,7 +114,7 @@ address, you’ll get a JSON response of {"error": "User with email baz@example.
 
 #### PUT /emails/<int:email_id>
 
-The final route that you’ll need is the ability to mark an email as read/unread or as archived/unarchived. 
+The final route is the ability to mark an email as read/unread or as archived/unarchived. 
 To do so, send a PUT request (instead of a GET) request to /emails/<email_id> where email_id is the id of 
 the email you’re trying to modify. For example, JavaScript code like:
 
