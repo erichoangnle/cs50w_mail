@@ -128,7 +128,7 @@ fetch('/emails/100', {
 ```
 
 would mark email number 100 as archived. The body of the PUT request could also be {archived: false} to 
-unarchive the message, and likewise could be either {read: true} or read: false} to mark the email as read 
+unarchive the message, and likewise could be either {read: true} or {read: false} to mark the email as read 
 or unread, respectively.
 
 ## Specification
