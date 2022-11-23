@@ -18,7 +18,7 @@ pip install django
 
 To download this program, enter the following command in your terminal:
 ```
-git clone https://github.com/erichoangnle/email.git
+git clone https://github.com/erichoangnle/cs50w_mail.git
 ```
 
 ## API
@@ -182,4 +182,4 @@ Email: erichoangnle@gmail.com
 
 Facebook: https://www.facebook.com/eric.le.520900
 
-Project link: https://github.com/erichoangnle/email.git
+Project link: https://github.com/erichoangnle/cs50w_mail.git
